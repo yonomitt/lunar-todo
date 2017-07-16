@@ -1,0 +1,8 @@
+version: '2'
+services:
+  webapp:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8088:8088"
