@@ -22,11 +22,20 @@ struct TodoList {
     mutating func add(item: TodoItem) -> TodoItem {
         
         var newItem = item
-            
-        newItem.id = nextID
-        nextID += 1
         
-        items.append(newItem)
+        if let db = db {
+            
+            let res = try? db.query("INSERT INTO todo (item) VALUES($1) RETURNING id", params: [String.from(item.jsonDict())])
+            if let row = res?.rows().first {
+                newItem.id = row["id"] as? Int ?? newItem.id
+            }
+        } else {
+            
+            newItem.id = nextID
+            nextID += 1
+
+            items.append(newItem)
+        }
         
         return newItem
     }
