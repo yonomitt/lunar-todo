@@ -8,15 +8,13 @@
 
 struct TodoItem {
     
-    var id = -1 {
-        didSet {
-            url = "/\(id)/"
-        }
-    }
-    
+    var id = -1
     var title = ""
     var completed = false
-    var url = ""
+    
+    var url: String {
+        return "\(URLBASE)/\(id)/"
+    }
     
     func jsonDict() -> JSONDict {
         return ["title": title,
