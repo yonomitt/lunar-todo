@@ -16,6 +16,9 @@ final class TodoController {
         // POST a todo item
         self.app.post("/", handlePostTodo)
         
+        // DELETE a todo item
+        self.app.delete("/", handleDelete)
+        
         addInsecureCORSSupport(self.app)
     }
     
@@ -34,5 +37,12 @@ final class TodoController {
         }
             
         return (req, Response(200, String.from(json)))
+    }
+    
+    /// This function handles the todo DELETE requests
+    
+    func handleDelete(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
+        
+        return (req, Response(200))
     }
 }
