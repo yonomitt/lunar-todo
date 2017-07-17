@@ -27,6 +27,15 @@ struct TodoList {
         items.removeAll()
     }
     
+    func findItem(for id: Int) -> TodoItem? {
+        
+        if let index = items.index(where: { $0.id == id }) {
+            return items[index]
+        }
+        
+        return nil
+    }
+    
     func jsonArray() -> [JSONDict] {
         return items.map { $0.jsonDict() }
     }
