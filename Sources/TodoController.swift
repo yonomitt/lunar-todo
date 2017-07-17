@@ -13,7 +13,11 @@ final class TodoController {
     init(app: Titan) {
         self.app = app
         
+        // GET all todo items
         self.app.get("/", handleWebroot)
+        
+        // GET a single todo item
+        self.app.get("/*", handleGetItem)
         
         // POST a todo item
         self.app.post("/", handlePostTodo)
@@ -29,6 +33,19 @@ final class TodoController {
     func handleWebroot(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
         
         return (req, Response(200, String.from(todoList.jsonArray())))
+    }
+    
+    /// This function will handle GET requests for a particular todo url
+    
+    func handleGetItem(req: RequestType, id: String, res: ResponseType) -> (RequestType, ResponseType) {
+        
+        if let id = Int(id),
+            let item = todoList.findItem(for: id) {
+            
+            return (req, Response(200, String.from(item.jsonDict())))
+        }
+
+        return (req, Response(400))
     }
     
     /// This function handles the todo POST requests
