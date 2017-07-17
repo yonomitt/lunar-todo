@@ -47,6 +47,17 @@ struct TodoList {
         return nil
     }
     
+    mutating func updateCompleted(for id: Int, completed: Bool) -> TodoItem? {
+        
+        if let index = items.index(where: { $0.id == id }) {
+            items[index].completed = completed
+            
+            return items[index]
+        }
+        
+        return nil
+    }
+    
     func jsonArray() -> [JSONDict] {
         return items.map { $0.jsonDict() }
     }
