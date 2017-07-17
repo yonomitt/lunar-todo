@@ -23,6 +23,13 @@ struct TodoList {
         return newItem
     }
     
+    mutating func delete(for id: Int) {
+        
+        if let index = items.index(where: { $0.id == id }) {
+            items.remove(at: index)
+        }
+    }
+    
     mutating func clear() {
         items.removeAll()
     }
