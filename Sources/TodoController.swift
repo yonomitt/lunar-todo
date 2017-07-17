@@ -8,6 +8,8 @@ final class TodoController {
 
     let app: Titan
     
+    let todoList = TodoList()
+    
     init(app: Titan) {
         self.app = app
         
@@ -25,7 +27,8 @@ final class TodoController {
     /// This function will handle the GET requests at the root page
     
     func handleWebroot(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
-        return (req, Response(200, "This is a simple Todo-Backend implementation using Swift, Titan, Kitura, and Postgres"))
+        
+        return (req, Response(200, String.from(todoList.jsonArray())))
     }
     
     /// This function handles the todo POST requests
