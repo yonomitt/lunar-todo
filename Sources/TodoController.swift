@@ -49,6 +49,8 @@ final class TodoController {
     
     func handleDelete(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
         
+        todoList.clear()
+        
         return (req, Response(200))
     }
 }
