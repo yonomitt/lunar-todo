@@ -15,7 +15,7 @@ let dbName = env["POSTGRES_DB"] ?? ""
 let dbCredentials = RopeCredentials(host: dbHost, port: 5432,  dbName: dbName, user: dbUser, password: dbPassword)
 let db = try? Rope.connect(credentials: dbCredentials)
 
-let todoController = TodoController(app: Titan())
+let todoController = TodoController(app: Titan(), db: db)
 
 // start the Kitura webserver on port 8088
 TitanKituraAdapter.serve(todoController.app.app, on: 8088)

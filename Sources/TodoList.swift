@@ -6,10 +6,14 @@
 //
 //
 
+import Rope
+
 struct TodoList {
     
     private var nextID = 0
     private var items = [TodoItem]()
+    
+    var db: Rope?
     
     mutating func add(item: TodoItem) -> TodoItem {
         

@@ -1,4 +1,5 @@
 import Foundation
+import Rope
 import Titan
 import TitanCORS
 
@@ -10,7 +11,8 @@ final class TodoController {
     
     var todoList = TodoList()
     
-    init(app: Titan) {
+    init(app: Titan, db: Rope?) {
+        todoList.db = db
         self.app = app
         
         self.app.get("/", getAllTodoItems)
