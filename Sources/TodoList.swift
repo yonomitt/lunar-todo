@@ -10,6 +10,10 @@ struct TodoList {
     
     private var items = [TodoItem]()
     
+    mutating func add(item: TodoItem) {
+        items.append(item)
+    }
+    
     func jsonArray() -> [JSONDict] {
         return items.map { $0.jsonDict() }
     }
