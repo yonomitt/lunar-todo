@@ -22,4 +22,17 @@ extension String {
         
         return "{}"
     }
+    
+    static func from(_ json: [JSONDict]) -> String {
+        
+        if let data = try? JSONSerialization.data(withJSONObject: json, options: []) {
+            
+            let string = String(data: data, encoding: .utf8) ?? "[]"
+            
+            return string
+            
+        }
+        
+        return "[]"
+    }
 }
