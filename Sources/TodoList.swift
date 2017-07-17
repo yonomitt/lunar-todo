@@ -87,13 +87,31 @@ struct TodoList {
     
     mutating func updateItem(for id: Int, title: String?, completed: Bool?, order: Int?) -> TodoItem? {
     
-        if let index = items.index(where: { $0.id == id }) {
+        if let db = db {
             
-            items[index].title = title ?? items[index].title
-            items[index].completed = completed ?? items[index].completed
-            items[index].order = order ?? items[index].order
+            if let item = findItem(for: id) {
+                
+                var updated = item
+                
+                updated.title = title ?? item.title
+                updated.completed = completed ?? item.completed
+                updated.order = order ?? item.order
+                
+                let _ = try? db.query("UPDATE todo SET item=$1 WHERE id=$2", params: [String.from(updated.jsonDict()), id])
+                
+                return updated
+            }
+
+        } else {
             
-            return items[index]
+            if let index = items.index(where: { $0.id == id }) {
+                
+                items[index].title = title ?? items[index].title
+                items[index].completed = completed ?? items[index].completed
+                items[index].order = order ?? items[index].order
+                
+                return items[index]
+            }
         }
         
         return nil
