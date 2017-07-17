@@ -39,7 +39,9 @@ final class TodoController {
             return (req, Response(400))
         }
         
-        let todoItem = TodoItem(title: json["title"] as? String ?? "")
+        var todoItem = TodoItem()
+        todoItem.title = json["title"] as? String ?? ""
+        
         todoList.add(item: todoItem)
         
         return (req, Response(200, String.from(json)))
