@@ -7,3 +7,9 @@ services:
     ports:
       - "8088:8088"
     env_file: .env
+  db:
+    image: postgres:9.6.3
+    env_file: .env
+    volumes:
+      - ./data:/var/lib/postgresql/data/todo
+
