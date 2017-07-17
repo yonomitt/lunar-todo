@@ -13,7 +13,11 @@ struct TodoList {
     private var nextID = 0
     private var items = [TodoItem]()
     
-    var db: Rope?
+    var db: Rope? {
+        didSet {
+            let _ = try? db?.query("CREATE TABLE IF NOT EXISTS todo ( id SERIAL PRIMARY KEY, item JSONB )")
+        }
+    }
     
     mutating func add(item: TodoItem) -> TodoItem {
         
