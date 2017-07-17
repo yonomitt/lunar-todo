@@ -22,6 +22,9 @@ final class TodoController {
         // POST a todo item
         self.app.post("/", handlePostTodo)
         
+        // PATCH a todo item
+        self.app.patch("/*", handlePatchTodo)
+        
         // DELETE a todo item
         self.app.delete("/", handleDelete)
         
@@ -62,6 +65,21 @@ final class TodoController {
         todoItem = todoList.add(item: todoItem)
         
         return (req, Response(200, String.from(todoItem.jsonDict())))
+    }
+    
+    /// This function handles the todo PATCH requests
+    
+    func handlePatchTodo(req: RequestType, id: String, res: ResponseType) -> (RequestType, ResponseType) {
+        
+        if let json = req.json as? JSONDict,
+            let id = Int(id),
+            let title = json["title"] as? String,
+            let item = todoList.updateTitle(for: id, title: title) {
+            
+            return (req, Response(200, String.from(item.jsonDict())))
+        }
+        
+        return (req, Response(400))
     }
     
     /// This function handles the todo DELETE requests
