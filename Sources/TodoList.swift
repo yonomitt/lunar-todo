@@ -42,8 +42,14 @@ struct TodoList {
     
     mutating func delete(for id: Int) {
         
-        if let index = items.index(where: { $0.id == id }) {
-            items.remove(at: index)
+        if let db = db {
+
+            let _ = try? db.query("DELETE FROM todo WHERE id=$1", params: [id])
+        } else {
+
+            if let index = items.index(where: { $0.id == id }) {
+                items.remove(at: index)
+            }
         }
     }
     
