@@ -8,7 +8,7 @@ final class TodoController {
 
     let app: Titan
     
-    let todoList = TodoList()
+    var todoList = TodoList()
     
     init(app: Titan) {
         self.app = app
@@ -38,7 +38,10 @@ final class TodoController {
         guard let json = req.json as? JSONDict else {
             return (req, Response(400))
         }
-            
+        
+        let todoItem = TodoItem(title: json["title"] as? String ?? "")
+        todoList.add(item: todoItem)
+        
         return (req, Response(200, String.from(json)))
     }
     
