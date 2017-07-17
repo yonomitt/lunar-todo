@@ -8,11 +8,9 @@
 
 struct TodoItem {
     
-    var id = -1
     var title = ""
     
     func jsonDict() -> JSONDict {
-        return ["id": id,
-                "title": title]
+        return ["title": title]
     }
 }
