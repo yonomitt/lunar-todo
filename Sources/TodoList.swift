@@ -54,7 +54,12 @@ struct TodoList {
     }
     
     mutating func clear() {
-        items.removeAll()
+        
+        if let db = db {
+            let _ = try? db.query("DELETE FROM todo")
+        } else {
+            items.removeAll()
+        }
     }
     
     func findItem(for id: Int) -> TodoItem? {
