@@ -13,6 +13,9 @@ final class TodoController {
         
         self.app.get("/", handleWebroot)
         
+        // POST a todo item
+        self.app.post("/", handlePostTodo)
+        
         addInsecureCORSSupport(self.app)
     }
     
@@ -20,5 +23,16 @@ final class TodoController {
     
     func handleWebroot(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
         return (req, Response(200, "This is a simple Todo-Backend implementation using Swift, Titan, Kitura, and Postgres"))
+    }
+    
+    /// This function handles the todo POST requests
+    
+    func handlePostTodo(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
+        
+        guard let json = req.json as? JSONDict else {
+            return (req, Response(400))
+        }
+            
+        return (req, Response(200, String.from(json)))
     }
 }
