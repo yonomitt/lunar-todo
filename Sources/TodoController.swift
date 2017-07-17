@@ -88,6 +88,10 @@ final class TodoController {
                 item = todoList.updateCompleted(for: id, completed: completed)
             }
             
+            if let order = json["order"] as? Int {
+                item = todoList.updateOrder(for: id, order: order)
+            }
+            
             if let item = item {
                 return (req, Response(200, String.from(item.jsonDict())))
             }
