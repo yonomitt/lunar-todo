@@ -8,10 +8,19 @@
 
 struct TodoList {
     
+    private var nextID = 0
     private var items = [TodoItem]()
     
-    mutating func add(item: TodoItem) {
-        items.append(item)
+    mutating func add(item: TodoItem) -> TodoItem {
+        
+        var newItem = item
+            
+        newItem.id = nextID
+        nextID += 1
+        
+        items.append(newItem)
+        
+        return newItem
     }
     
     mutating func clear() {
