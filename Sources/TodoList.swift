@@ -64,8 +64,22 @@ struct TodoList {
     
     func findItem(for id: Int) -> TodoItem? {
         
-        if let index = items.index(where: { $0.id == id }) {
-            return items[index]
+        if let db = db {
+            
+            let res = try? db.query("SELECT id, item FROM todo WHERE id=$1", params: [id])
+            
+            if let row = res?.rows().first {
+                let id = row["id"] as? Int ?? -1
+                let item = row["item"] as? JSONDict ?? [:]
+                let todoItem = TodoItem(id: id, json: item)
+                
+                return todoItem
+            }
+        } else {
+            
+            if let index = items.index(where: { $0.id == id }) {
+                return items[index]
+            }
         }
         
         return nil
