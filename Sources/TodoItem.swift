@@ -10,9 +10,11 @@ struct TodoItem {
     
     var title = ""
     var completed = false
+    var url = ""
     
     func jsonDict() -> JSONDict {
         return ["title": title,
-                "completed": completed]
+                "completed": completed,
+                "url": url]
     }
 }
