@@ -99,22 +99,29 @@ struct TodoList {
         return nil
     }
     
-    mutating func jsonArray() -> [JSONDict] {
+    func jsonArray() -> [JSONDict] {
         
+        var allItems: [TodoItem]
+
         if let db = db {
         
+            allItems = [TodoItem]()
+            
             let res = try? db.query("SELECT id, item FROM todo")
+
             if let rows = res?.rows() {
-                items.removeAll()
                 for row in rows {
                     let id = row["id"] as? Int ?? -1
                     let item = row["item"] as? JSONDict ?? [:]
                     let todoItem = TodoItem(id: id, json: item)
-                    items.append(todoItem)
+                    allItems.append(todoItem)
                 }
             }
+            
+        } else {
+            allItems = items
         }
         
-        return items.map { $0.jsonDict() }
+        return allItems.map { $0.jsonDict() }
     }
 }
