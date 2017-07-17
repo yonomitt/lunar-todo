@@ -17,6 +17,17 @@ struct TodoItem {
         return "\(URLBASE)/\(id)/"
     }
     
+    init() {
+        
+    }
+    
+    init(id: Int, json: JSONDict) {
+        self.id = id
+        title = json["title"] as? String ?? ""
+        completed = json["completed"] as? Bool ?? false
+        order = json["order"] as? Int ?? -1
+    }
+    
     func jsonDict() -> JSONDict {
         return ["title": title,
                 "completed": completed,

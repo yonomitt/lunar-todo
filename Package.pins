@@ -20,6 +20,18 @@
       "version": "1.7.0"
     },
     {
+      "package": "Rope",
+      "reason": null,
+      "repositoryURL": "https://github.com/bermudadigitalstudio/Rope.git",
+      "version": "0.5.1"
+    },
+    {
+      "package": "RopeLibpq",
+      "reason": null,
+      "repositoryURL": "https://github.com/bermudadigitalstudio/rope-libpq.git",
+      "version": "0.2.0"
+    },
+    {
       "package": "SSLService",
       "reason": null,
       "repositoryURL": "https://github.com/IBM-Swift/BlueSSLService.git",
