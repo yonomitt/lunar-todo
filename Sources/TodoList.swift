@@ -14,6 +14,10 @@ struct TodoList {
         items.append(item)
     }
     
+    mutating func clear() {
+        items.removeAll()
+    }
+    
     func jsonArray() -> [JSONDict] {
         return items.map { $0.jsonDict() }
     }
