@@ -72,11 +72,21 @@ final class TodoController {
     func handlePatchTodo(req: RequestType, id: String, res: ResponseType) -> (RequestType, ResponseType) {
         
         if let json = req.json as? JSONDict,
-            let id = Int(id),
-            let title = json["title"] as? String,
-            let item = todoList.updateTitle(for: id, title: title) {
+            let id = Int(id) {
             
-            return (req, Response(200, String.from(item.jsonDict())))
+            var item: TodoItem? = nil
+            
+            if let title = json["title"] as? String {
+                item = todoList.updateTitle(for: id, title: title)
+            }
+            
+            if let completed = json["completed"] as? Bool {
+                item = todoList.updateCompleted(for: id, completed: completed)
+            }
+            
+            if let item = item {
+                return (req, Response(200, String.from(item.jsonDict())))
+            }
         }
         
         return (req, Response(400))
