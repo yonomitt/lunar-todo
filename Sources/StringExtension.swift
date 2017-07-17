@@ -10,6 +10,10 @@ import Foundation
 
 extension String {
     
+    /// Convert a JSON dictionary to a string
+    ///
+    /// - Parameter json: a JSON dictionary
+    /// - Returns: a string representation
     static func from(_ json: JSONDict) -> String {
         
         if let data = try? JSONSerialization.data(withJSONObject: json, options: []) {
@@ -23,6 +27,10 @@ extension String {
         return "{}"
     }
     
+    /// Convert an array of JSON dictionaries to a string
+    ///
+    /// - Parameter json: an array of JSON dictionaries
+    /// - Returns: a string representation
     static func from(_ json: [JSONDict]) -> String {
         
         if let data = try? JSONSerialization.data(withJSONObject: json, options: []) {
