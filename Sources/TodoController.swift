@@ -25,8 +25,11 @@ final class TodoController {
         // PATCH a todo item
         self.app.patch("/*", handlePatchTodo)
         
-        // DELETE a todo item
+        // DELETE all todo items
         self.app.delete("/", handleDelete)
+        
+        // DELETE a single todo item
+        self.app.delete("/*", handleDeleteItem)
         
         addInsecureCORSSupport(self.app)
     }
@@ -97,6 +100,17 @@ final class TodoController {
     func handleDelete(req: RequestType, res: ResponseType) -> (RequestType, ResponseType) {
         
         todoList.clear()
+        
+        return (req, Response(200))
+    }
+    
+    /// This function will handle GET requests for a particular todo url
+    
+    func handleDeleteItem(req: RequestType, id: String, res: ResponseType) -> (RequestType, ResponseType) {
+        
+        if let id = Int(id) {
+            todoList.delete(for: id)
+        }
         
         return (req, Response(200))
     }
