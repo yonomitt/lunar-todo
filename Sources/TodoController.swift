@@ -64,6 +64,7 @@ final class TodoController {
         
         var todoItem = TodoItem()
         todoItem.title = json["title"] as? String ?? ""
+        todoItem.order = json["order"] as? Int ?? -1
         
         todoItem = todoList.add(item: todoItem)
         
