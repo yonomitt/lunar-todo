@@ -65,6 +65,17 @@ struct TodoList {
         return nil
     }
     
+    mutating func updateOrder(for id: Int, order: Int) -> TodoItem? {
+        
+        if let index = items.index(where: { $0.id == id }) {
+            items[index].order = order
+            
+            return items[index]
+        }
+        
+        return nil
+    }
+    
     func jsonArray() -> [JSONDict] {
         return items.map { $0.jsonDict() }
     }
