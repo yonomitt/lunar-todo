@@ -85,32 +85,13 @@ struct TodoList {
         return nil
     }
     
-    mutating func updateTitle(for id: Int, title: String) -> TodoItem? {
-        
-        if let index = items.index(where: { $0.id == id }) {
-            items[index].title = title
-            
-            return items[index]
-        }
-        
-        return nil
-    }
+    mutating func updateItem(for id: Int, title: String?, completed: Bool?, order: Int?) -> TodoItem? {
     
-    mutating func updateCompleted(for id: Int, completed: Bool) -> TodoItem? {
-        
         if let index = items.index(where: { $0.id == id }) {
-            items[index].completed = completed
             
-            return items[index]
-        }
-        
-        return nil
-    }
-    
-    mutating func updateOrder(for id: Int, order: Int) -> TodoItem? {
-        
-        if let index = items.index(where: { $0.id == id }) {
-            items[index].order = order
+            items[index].title = title ?? items[index].title
+            items[index].completed = completed ?? items[index].completed
+            items[index].order = order ?? items[index].order
             
             return items[index]
         }
