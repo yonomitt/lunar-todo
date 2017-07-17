@@ -44,7 +44,7 @@ final class TodoController {
         
         todoList.add(item: todoItem)
         
-        return (req, Response(200, String.from(json)))
+        return (req, Response(200, String.from(todoItem.jsonDict())))
     }
     
     /// This function handles the todo DELETE requests
