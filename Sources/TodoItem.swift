@@ -8,6 +8,12 @@
 
 struct TodoItem {
     
+    var id = -1 {
+        didSet {
+            url = "/\(id)/"
+        }
+    }
+    
     var title = ""
     var completed = false
     var url = ""
