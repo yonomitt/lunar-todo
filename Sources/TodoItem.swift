@@ -11,6 +11,7 @@ struct TodoItem {
     var id = -1
     var title = ""
     var completed = false
+    var order = -1
     
     var url: String {
         return "\(URLBASE)/\(id)/"
@@ -19,6 +20,7 @@ struct TodoItem {
     func jsonDict() -> JSONDict {
         return ["title": title,
                 "completed": completed,
+                "order": order,
                 "url": url]
     }
 }
